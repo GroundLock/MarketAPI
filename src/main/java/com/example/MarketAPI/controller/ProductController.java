@@ -1,7 +1,6 @@
 package com.example.MarketAPI.controller;
 
 import com.example.MarketAPI.model.Product;
-import com.example.MarketAPI.repository.ProductRepository;
 import com.example.MarketAPI.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +17,11 @@ public class ProductController {
     @GetMapping
     public List<Product> getAll(){
         return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Product getId(@PathVariable Long id){
+        return service.getId(id);
     }
 
     @PostMapping

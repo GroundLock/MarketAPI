@@ -5,6 +5,7 @@ import com.example.MarketAPI.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -17,6 +18,11 @@ public class ProductService {
 
     public List<Product> getAll(){
         return repository.findAll();
+    }
+
+    public Product getId(Long id){
+        Optional<Product> product = repository.findById(id);
+        return product.orElse(null);
     }
 
     public Product create(Product product){
