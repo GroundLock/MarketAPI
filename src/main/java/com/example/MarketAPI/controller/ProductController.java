@@ -1,34 +1,37 @@
 package com.example.MarketAPI.controller;
 
+import com.example.MarketAPI.model.Product;
 import com.example.MarketAPI.repository.ProductRepository;
+import com.example.MarketAPI.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
 
     @Autowired
-    ProductRepository repository;
+    ProductService service;
 
     @GetMapping
-    public String getAll(){
-        return "getAll";
+    public List<Product> getAll(){
+        return service.getAll();
     }
 
     @PostMapping
-    public String create(){
-        return "create";
+    public Product create(@RequestBody Product product){
+        return service.create(product);
     }
 
-    @PutMapping
-    public String update(){
-        return "update";
+    @PutMapping("/{id}")
+    public Product update(@PathVariable Long id, @RequestBody Product product){
+        return service.update(id, product);
     }
 
-    @DeleteMapping
-    public String delete(){
-        return "delete";
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        service.delete(id);
     }
 }
