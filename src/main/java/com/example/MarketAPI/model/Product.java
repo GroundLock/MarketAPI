@@ -6,9 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "TB_PRODUCTS")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 public class Product {
 
     @Id
