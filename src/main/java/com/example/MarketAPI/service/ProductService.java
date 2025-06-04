@@ -24,6 +24,9 @@ public class ProductService {
     }
 
     public Product update(Long id, Product product){
+        if (repository.findById(id).isEmpty()){
+            throw new RuntimeException("Product not found");
+        }
         product.setId(id);
         return repository.save(product);
     }
