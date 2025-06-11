@@ -2,6 +2,7 @@ package com.example.MarketAPI.controller;
 
 import com.example.MarketAPI.model.Product;
 import com.example.MarketAPI.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +20,13 @@ public class ProductController {
     }
 
     @GetMapping
+    @Operation(summary = "Shows all products in DB")
     public List<Product> getAll(){
         return service.getAll();
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Shows an specific product in DB")
     public ResponseEntity<?> getId(@PathVariable Long id){
         Product product = service.getId(id);
         if (product!=null){
@@ -35,6 +38,7 @@ public class ProductController {
     }
 
     @PostMapping
+    @Operation(summary = "Creates a product and save to DB")
     public ResponseEntity<String> create(@RequestBody Product product){
         Product newProduct = service.create(product);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -42,6 +46,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Updates a product in the DB")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Product product){
         Product newProduct = service.update(id, product);
         if (newProduct!=null){
@@ -53,6 +58,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Deletes product in the DB")
     public ResponseEntity<String> delete(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.ok("Product deleted on id " + id);
